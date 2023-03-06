@@ -1,6 +1,6 @@
 <template>
     <div class="item__box">
-        <div class="item__image" :style="{ backgroundImage: 'url(/images/' + post.image + ')'}">
+        <div class="item__image" :style="{ backgroundImage: 'url(/images/thumb/' + post.image + ')'}">
         </div>
         <div class="item__settings">
             <div class="item__settings__buttons">

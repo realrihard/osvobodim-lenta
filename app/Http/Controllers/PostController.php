@@ -50,25 +50,21 @@ class PostController extends Controller
 
         Log::info('Validation passed');
 
-        $imagePath = null;
+        //$imagePath = null;
+//
+        //$image = $request->file('image');
+        //$destintionPath = 'images/';
+        //$imagePath = date('YmdHis') . "." . $image->getClientOriginalExtension();
+        //$image->move($destintionPath, $imagePath);
+//
+        //$thumbPath = 'images/thumb/' . $imagePath;
+        //Image::make(public_path($destintionPath . $imagePath))
+        //    ->resize(400, null, function ($constraint) {
+        //        $constraint->aspectRatio();
+        //    })
+        //    ->save(public_path($thumbPath));
 
-        if ($request->file('image')->getClientMimeType() == 'application/pdf') {
-            $pdf = new \Spatie\PdfToImage\Pdf($request->file('image'));
-            $image = $pdf->saveImage(public_path('images'));
-            $imagePath = 'images/' . $image;
-        } else {
-            $image = $request->file('image');
-            $destintionPath = 'images/';
-            $imagePath = date('YmdHis') . "." . $image->getClientOriginalExtension();
-            $image->move($destintionPath, $imagePath);
-
-            $thumbPath = 'thumb/' . $imagePath;
-            Image::make(public_path($destintionPath . $imagePath))
-                ->resize(400, null, function ($constraint) {
-                    $constraint->aspectRatio();
-                })
-                ->save(public_path($thumbPath));
-        }
+        $imagePath = $this->uploadImage($request->image);
 
         $post = Post::create([
             'description' => optional($request->input('description'))->isEmpty() ? null : $request->input('description'),
@@ -123,19 +119,8 @@ class PostController extends Controller
         }
 
         if ($request->hasFile('image')) {
-            // удаляем старую картинку
-            if (file_exists(base_path('public/images/'.$post->image))) {
-                unlink(base_path('public/images/'.$post->image));
-            }
-
-            $imagePath = null;
-
-            $image = $request->file('image');
-            $destintionPath = 'images/';
-            $imagePath = date('YmdHis') . "." . $image->getClientOriginalExtension();
-            $image->move($destintionPath, $imagePath);
-
-            $post->image = $imagePath;
+            $this->deleteImages($post->image);
+            $post->image = $this->uploadImage($request->image);
         }
 
         $post->save();
@@ -167,8 +152,63 @@ class PostController extends Controller
     public function destroy($id)
     {
         $post = Post::find($id);
+
+        $this->deleteImages($post->image);
+
         if($post) {
             $post->delete();
+        }
+    }
+
+    public function uploadImage($img) {
+        $filename = null;
+
+        $image = $img;
+        $destintionPath = 'images/';
+        $filename = date('YmdHis') . "." . $image->getClientOriginalExtension();
+        $path = public_path('/images/' . $filename);
+
+        // Upload original image
+        Image::make($image)->save($path);
+
+        // Get sizes of image
+        $dimensions = getimagesize($path);
+        $width = $dimensions[0];
+        $height = $dimensions[1];
+
+        if ($width > 1000 || $height > 1000) {
+            $ratio = $width / $height;
+            if ($width > $height) {
+                $newWidth = 1000;
+                $newHeight = intval($newWidth / $ratio);
+            } else {
+                $newHeight = 1000;
+                $newWidth = intval($newHeight * $ratio);
+            }
+
+            // Make new compact image
+            Image::make($image)
+                ->resize($newWidth, $newHeight, function ($constraint) {
+                    $constraint->aspectRatio();
+                })
+                ->save($path);
+        }
+
+        // make thumbs
+        Image::make(public_path($destintionPath . $filename))
+            ->resize(400, null, function ($constraint) {
+                $constraint->aspectRatio();
+            })
+            ->save(public_path('images/thumb/' . $filename));
+
+        return $filename;
+    }
+
+    public function deleteImages($imageName) {
+        // delete prev picture
+        if (file_exists(base_path('public/images/'.$imageName))) {
+            unlink(base_path('public/images/'.$imageName));
+            unlink(base_path('public/images/thumb/'.$imageName));
         }
     }
 }

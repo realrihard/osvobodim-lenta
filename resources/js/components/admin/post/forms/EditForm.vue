@@ -56,7 +56,7 @@ export default {
 
         onMounted (() => {
             form.value = store.editedPost
-            imageFile.value = '/images/' + form.value.image
+            imageFile.value = '/images/thumb/' + form.value.image
         })
 
         const onFileChange = (e) => {
@@ -146,7 +146,7 @@ export default {
             &.with__preview {
                 background-color: transparent;
                 border: none;
-                height: 500px;
+                height: 400px;
             }
 
             &:hover {

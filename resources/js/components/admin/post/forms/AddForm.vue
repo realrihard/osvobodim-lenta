@@ -64,7 +64,7 @@ export default {
             formData.append('image', file.value);
 
             const response = await apiData.addPost(formData);
-            console.log(response)
+
             if (response instanceof Error) {
                 console.log('Произошла ошибка', response);
             } else {
@@ -130,7 +130,7 @@ export default {
             &.with__preview {
                 background-color: transparent;
                 border: none;
-                height: 500px;
+                height: 400px;
             }
 
             &:hover {
