@@ -15,9 +15,10 @@ return new class extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
-            $table->integer('suma');
-            $table->text('description');
-            $table->string('image');
+            $table->bigInteger('suma')->nullable();
+            $table->text('description')->nullable();
+            $table->string('thumb')->nullable();
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }

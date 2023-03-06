@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use Spatie\PdfToImage\Pdf;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+use App\Http\Resources\PostResource;
 use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image;
 
 class PostController extends Controller
 {
@@ -18,7 +21,7 @@ class PostController extends Controller
     {
         $posts = Post::latest()->paginate(5);
 
-        return view('index', compact('posts'))->with('i', (request()->input('page', 1) - 1) *5 );
+        return view('admin.dashboard', compact('posts'))->with('i', (request()->input('page', 1) - 1) *5 );
     }
 
     /**
@@ -40,10 +43,12 @@ class PostController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'description' => 'required',
-            'suma' => 'required',
+            'description' => 'nullable',
+            'suma' => 'nullable|regex:/^[0-9]+$/',
             'image' => 'required|file|max:2048'
         ]);
+
+        Log::info('Validation passed');
 
         $imagePath = null;
 
@@ -56,15 +61,22 @@ class PostController extends Controller
             $destintionPath = 'images/';
             $imagePath = date('YmdHis') . "." . $image->getClientOriginalExtension();
             $image->move($destintionPath, $imagePath);
+
+            $thumbPath = 'thumb/' . $imagePath;
+            Image::make(public_path($destintionPath . $imagePath))
+                ->resize(400, null, function ($constraint) {
+                    $constraint->aspectRatio();
+                })
+                ->save(public_path($thumbPath));
         }
 
-        Post::create([
-            'description' => $request->input('description'),
-            'suma' => $request->input('suma'),
+        $post = Post::create([
+            'description' => optional($request->input('description'))->isEmpty() ? null : $request->input('description'),
+            'suma' => optional($request->input('suma'))->isEmpty() ? null : $request->input('description'),
             'image' => $imagePath,
         ]);
 
-        return redirect()->route('index')->with('success', 'Post created seccessfully');
+        return response()->json($post, 201);
     }
 
     /**
@@ -75,7 +87,9 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        //
+        $posts = PostResource::collection(Post::orderBy('created_at', 'desc')->get());
+
+        return $posts;
     }
 
     /**
@@ -84,9 +98,52 @@ class PostController extends Controller
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function edit(Post $post)
+    public function edit(Request $request, $id)
     {
-        //
+        $request->validate([
+            'description' => 'nullable',
+            'suma' => 'nullable|regex:/^[0-9]+?$/',
+            'image' => 'nullable|file|max:2048'
+        ]);
+
+        Log::info('Validation passed');
+
+        $post = Post::find($id);
+
+        if (!$post) {
+            abort(404, 'Post not found');
+        }
+
+        if ($request->has('description')) {
+            $post->description = $request->description;
+        }
+
+        if ($request->has('suma')) {
+            $post->suma = $request->suma;
+        }
+
+        if ($request->hasFile('image')) {
+            // удаляем старую картинку
+            if (file_exists(base_path('public/images/'.$post->image))) {
+                unlink(base_path('public/images/'.$post->image));
+            }
+
+            $imagePath = null;
+
+            $image = $request->file('image');
+            $destintionPath = 'images/';
+            $imagePath = date('YmdHis') . "." . $image->getClientOriginalExtension();
+            $image->move($destintionPath, $imagePath);
+
+            $post->image = $imagePath;
+        }
+
+        $post->save();
+
+        return response()->json([
+            'message' => 'Post updated successfully',
+            'post' => $post
+        ]);
     }
 
     /**
@@ -107,8 +164,11 @@ class PostController extends Controller
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Post $post)
+    public function destroy($id)
     {
-        //
+        $post = Post::find($id);
+        if($post) {
+            $post->delete();
+        }
     }
 }

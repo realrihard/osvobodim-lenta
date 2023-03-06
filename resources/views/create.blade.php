@@ -1,9 +1,9 @@
-@extends('app')
+@extends('layouts.admin')
 
 @section('content')
     <div class="header">
         <h1>Create post</h1>
-        <a href="/">Вернуться</a>
+        <a href="/admin">Вернуться</a>
     </div>
 
     @if ($errors->any())

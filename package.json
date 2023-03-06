@@ -6,13 +6,23 @@
     },
     "devDependencies": {
         "autoprefixer": "^10.4.13",
-        "axios": "^1.1.2",
+        "axios": "^1.3.4",
         "laravel-vite-plugin": "^0.7.2",
-        "lodash": "^4.17.19",
         "sass": "^1.58.3",
         "vite": "^4.0.0"
     },
     "dependencies": {
-        "modern-normalize": "^1.1.0"
+        "@vitejs/plugin-vue": "^4.0.0",
+        "boxicons": "^2.1.4",
+        "colcade": "^0.2.0",
+        "desandro-matches-selector": "^2.0.2",
+        "lodash": "^4.17.21",
+        "macy": "^2.5.1",
+        "modern-normalize": "^1.1.0",
+        "pinia": "^2.0.32",
+        "skeleton-css": "^2.0.4",
+        "vue": "^3.2.36",
+        "vue-flex-waterfall": "^2.2.0",
+        "vue-router": "^4.1.6"
     }
 }

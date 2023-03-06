@@ -14,10 +14,19 @@ use App\Http\Controllers\PostController;
 |
 */
 
-//Route::get('/', function () {
-//    return view('welcome');
-//});
+Route::get('/', [PostController::class, 'show'])->name('index');
+Route::get('/grid-1', function() {
+    return view('grid1');
+});
+Route::get('/grid-2', [PostController::class, 'index'])->name('grid-2');
+Route::get('/waterfall', function() {
+    return view('index');
+});
 
-Route::get('/', [PostController::class, 'index'])->name('index');
-Route::get('/create', [PostController::class, 'create'])->name('create');
-Route::post('/store', [PostController::class, 'store'])->name('store');
+Route::group(['middleware' => 'auth:sanctum'], function() {
+    Route::get('/admin', [PostController::class, 'index'])->name('admin.dashboard');
+    Route::get('/admin/create', [PostController::class, 'create'])->name('create');
+    Route::post('/admin/store', [PostController::class, 'store'])->name('store');
+});
+
+Auth::routes();

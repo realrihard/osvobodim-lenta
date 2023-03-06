@@ -1,5 +1,7 @@
 @import '../../node_modules/modern-normalize/modern-normalize.css';
 
+@import '../../node_modules/skeleton-css/css/skeleton.css';
+
 .container {
     max-width: 1200px;
     padding: 0 15px;
@@ -9,4 +11,70 @@
 .header {
     width: 100%;
     margin-bottom: 50px;
+}
+
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+
+    &__image {
+        max-width: 300px;
+
+        img {
+            width: 100%;
+        }
+    }
+}
+
+
+#gallery:after {
+    display: block;
+    content: '';
+    clear: both;
+}
+
+.grid-col {
+    float: left;
+    width: 49%;
+    margin-right: 2%;
+}
+
+.grid-col--3 {
+    margin-right: 0;
+}
+
+/* hide two middle */
+.grid-col--2,
+    {
+    display: none;
+}
+
+@media (min-width: 768px) {
+    .grid-col {
+        width: 32%;
+    }
+
+    .grid-col--2 {
+        display: block;
+    }
+}
+
+@media (min-width: 1200px) {
+    .grid-col {
+        width: 32%;
+    }
+
+    .grid-col--2,
+    .grid-col--3 {
+        display: block;
+    }
+}
+
+.grid-item {
+    margin-bottom: 20px;
+
+    img {
+        width: 100%;
+    }
 }
