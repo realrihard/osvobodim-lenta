@@ -27,5 +27,6 @@ Route::group(['middleware' => 'auth:sanctum'], function() {
     Route::get('/posts/show/{id}', [PostController::class, 'edit']);
     Route::post('/posts/add', [PostController::class, 'store']);
     Route::post('/posts/edit/{id}', [PostController::class, 'edit']);
+    Route::post('/posts/change-post-order', [PostController::class, 'updatePostOrder']);
     Route::delete('/posts/delete/{id}', [PostController::class, 'destroy']);
 });

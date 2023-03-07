@@ -50,26 +50,15 @@ class PostController extends Controller
 
         Log::info('Validation passed');
 
-        //$imagePath = null;
-//
-        //$image = $request->file('image');
-        //$destintionPath = 'images/';
-        //$imagePath = date('YmdHis') . "." . $image->getClientOriginalExtension();
-        //$image->move($destintionPath, $imagePath);
-//
-        //$thumbPath = 'images/thumb/' . $imagePath;
-        //Image::make(public_path($destintionPath . $imagePath))
-        //    ->resize(400, null, function ($constraint) {
-        //        $constraint->aspectRatio();
-        //    })
-        //    ->save(public_path($thumbPath));
-
         $imagePath = $this->uploadImage($request->image);
+
+        $lastShowId = Post::latest()->value('showId');
 
         $post = Post::create([
             'description' => optional($request->input('description'))->isEmpty() ? null : $request->input('description'),
             'suma' => optional($request->input('suma'))->isEmpty() ? null : $request->input('description'),
             'image' => $imagePath,
+            'showId' => $lastShowId + 1
         ]);
 
         return response()->json($post, 201);
@@ -210,5 +199,17 @@ class PostController extends Controller
             unlink(base_path('public/images/'.$imageName));
             unlink(base_path('public/images/thumb/'.$imageName));
         }
+    }
+
+    public function updatePostOrder(Request $request)
+    {
+        $parameters = $request->request;
+        $newPostOrder = $parameters->all();
+
+        foreach ($newPostOrder as $item) {
+            Post::where('id', $item['id'])->update(['showId' => $item['showId']]);
+        }
+
+        return response()->json(['success' => true]);
     }
 }

@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import { useDashboardStore } from '../../store/dashboard';
+import { useDashboardStore } from '../../../store/dashboard';
 
 export default {
     setup() {

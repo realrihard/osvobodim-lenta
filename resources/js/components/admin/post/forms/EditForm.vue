@@ -33,8 +33,8 @@
 
 <script>
 import { onMounted, ref } from 'vue'
-import { useDashboardStore } from '../../../store/dashboard'
-import apiData from '../../../../services/api'
+import apiData from '../../../../services/api.js'
+import { useDashboardStore } from '../../../../store/dashboard.js'
 
 export default {
     setup() {

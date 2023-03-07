@@ -1,20 +1,32 @@
 <template>
-        <ul class="dashboard__list" @editPost="editPostPanel">
-            <li v-for="post in posts" :key="post" :class="post.deleted ? 'post__deleted' : ''">
-                <data-table-item
-                    :post="post"
-                />
-            </li>
-        </ul>
+        <draggable
+            v-model="postsArray"
+            group="posts"
+            @start="drag=true"
+            @end="drag=false"
+
+            item-key="showId"
+            class="dashboard__list"
+        >
+                <template #item="{element, index}">
+                    <div class="dashboard__list__item" :class="element.deleted ? 'post__deleted' : ''">
+                        <data-table-item :post="element"/>
+                    </div>
+                </template>
+        </draggable>
 </template>
 
 <script>
-import { defineComponent } from 'vue';
+import { defineComponent, computed, ref } from 'vue';
 import DataTableItem from './DataTableItem.vue';
+import draggable from 'vuedraggable'
+import { useDashboardStore } from '../../store/dashboard';
+import apiData from '../../services/api';
 
 export default defineComponent ({
     components: {
         DataTableItem,
+        draggable,
     },
     props: {
         posts: {
@@ -22,7 +34,24 @@ export default defineComponent ({
         }
     },
     setup(props) {
+        const store = useDashboardStore();
+        const drag = ref(false);
+
+        const postsArray = computed({
+            get: () => store.posts,
+            set: async (newValue) => {
+                newValue.forEach((obj, index) => {
+                    obj.showId = index;
+                });
+                store.getPosts(newValue)
+                apiData.updatePostOrder(newValue)
+            }
+        })
+
         return {
+            store,
+            drag,
+            postsArray,
         }
     },
 })
@@ -37,7 +66,7 @@ export default defineComponent ({
     grid-template-columns: repeat(auto-fit, minmax(300px, 364px));
     gap: 3rem;
 
-    li {
+    &__item {
         aspect-ratio: auto 1 / 1;
         overflow: hidden;
         border-radius: 1rem;

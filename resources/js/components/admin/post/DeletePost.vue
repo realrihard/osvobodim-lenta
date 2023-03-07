@@ -6,7 +6,7 @@
 
 <script>
 import apiData from '../../../services/api'
-import { useDashboardStore } from '../../store/dashboard.js'
+import { useDashboardStore } from '../../../store/dashboard.js'
 
 export default {
     props: {

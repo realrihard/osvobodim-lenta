@@ -33,8 +33,9 @@
 
 <script>
 import { ref } from 'vue'
-import { useDashboardStore } from '../../../store/dashboard.js';
+
 import apiData from '../../../../services/api.js';
+import { useDashboardStore } from '../../../../store/dashboard.js';
 
 export default {
     setup() {

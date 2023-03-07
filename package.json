@@ -23,6 +23,7 @@
         "skeleton-css": "^2.0.4",
         "vue": "^3.2.36",
         "vue-flex-waterfall": "^2.2.0",
-        "vue-router": "^4.1.6"
+        "vue-router": "^4.1.6",
+        "vuedraggable": "^4.1.0"
     }
 }

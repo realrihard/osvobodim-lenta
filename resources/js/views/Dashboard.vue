@@ -28,7 +28,7 @@ import PostPanel from '../components/admin/post/PostPanel.vue';
 import AddPost from '../components/admin/post/AddPost.vue';
 import AddForm from '../components/admin/post/forms/AddForm.vue';
 import EditForm from '../components/admin/post/forms/EditForm.vue';
-import { useDashboardStore } from '../components/store/dashboard';
+import { useDashboardStore } from '../store/dashboard';
 import apiData from '../services/api.js';
 
 export default {
