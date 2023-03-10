@@ -1,5 +1,5 @@
 <template>
-    <Smoothie ref="smoothie" class="content">
+    <Smoothie class="content">
         <div class="container">
             <header-comp />
             <hero />

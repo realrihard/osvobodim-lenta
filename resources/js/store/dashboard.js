@@ -3,6 +3,7 @@ import { defineStore } from 'pinia'
 export const useDashboardStore = defineStore('store', {
     state: () => ({
         posts: [],
+        pagination: [],
         panelSettings: {
             visible: false,
             title: "",
@@ -11,8 +12,13 @@ export const useDashboardStore = defineStore('store', {
         editedPost: null
     }),
     actions: {
-        getPosts(posts) {
-            this.posts = posts
+        getPosts(data) {
+            this.posts = data.posts
+            this.pagination = data.pagination
+        },
+        getNewPosts(data) {
+            this.posts.push(...data.posts)
+            this.pagination = data.pagination
         },
         getPanelSettings(visible, title, type) {
             this.panelSettings.visible = visible

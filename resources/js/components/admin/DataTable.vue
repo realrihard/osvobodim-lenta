@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import { defineComponent, computed, ref } from 'vue';
+import { defineComponent, computed, ref, onMounted, onUnmounted } from 'vue';
 import DataTableItem from './DataTableItem.vue';
 import draggable from 'vuedraggable'
 import { useDashboardStore } from '../../store/dashboard';

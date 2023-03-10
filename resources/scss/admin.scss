@@ -1,5 +1,11 @@
 @import '../../node_modules/modern-normalize/modern-normalize.css';
 
+html,
+body,
+#app {
+    height: 100%;
+}
+
 html {
     font-size: 8px;
 }
@@ -92,4 +98,10 @@ textarea {
     &:disabled {
         background-color: hsl(353.2620320855615deg 15% 52.74509803921569%)
     }
+}
+
+.dashboard__wrapper {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
 }

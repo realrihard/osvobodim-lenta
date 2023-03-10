@@ -11,7 +11,7 @@
 </head>
 
 <body>
-    <div class="container">
+    <div class="dashboard__wrapper">
         <div class="header">
             <ul class="navbar-nav ms-auto">
                 <!-- Authentication Links -->
@@ -49,9 +49,7 @@
                 @endguest
             </ul>
         </div>
-        <div class="container">
-            @yield('content')
-        </div>
+        @yield('content')
     </div>
 </body>
 

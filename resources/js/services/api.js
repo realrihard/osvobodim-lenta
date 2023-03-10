@@ -1,13 +1,15 @@
 import axios from "axios";
 
 export default class apiData {
-    static async getData() {
+    static async getData(page = 1) {
+        console.log(page)
         try {
             const data = await axios.get("/sanctum/csrf-cookie").then(resp => {
-                return axios.get('api/posts/show')
+                return axios.get('api/posts/show?page=' + page)
                     .then((response) => {
-                        const data = response.data.data.sort((a, b) => a.showId - b.showId);
-                        return data
+                        console.log(response)
+                        //const data = response.data.data.sort((a, b) => a.showId - b.showId);
+                        return response.data
                     })
             })
             return data

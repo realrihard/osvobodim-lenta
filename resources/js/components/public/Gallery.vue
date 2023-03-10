@@ -16,7 +16,7 @@
 
 <script>
 import axios from 'axios'
-import { ref, onMounted, onUnmounted, nextTick, computed } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 import Stamp from './Stamp.vue'
 
 export default {
@@ -29,6 +29,7 @@ export default {
         const currentPage = ref(1)
         const pages = ref(null)
         const imageLoaded = ref(false)
+        const content = ref(null)
 
         onMounted (async() => {
             await axios.get('/posts')
@@ -36,12 +37,12 @@ export default {
                 posts.value = response.data.posts
                 pages.value = response.data.pagination.totalPages
             })
-            const content = document.querySelector('.content')
-            content.addEventListener('scroll', scrollHandle)
+            content.value = document.querySelector('.content')
+            content.value.addEventListener('scroll', scrollHandle)
         })
 
         onUnmounted (() => {
-            window.removeEventListener('scroll', scrollHandle)
+            content.value.removeEventListener('scroll', scrollHandle)
         })
 
         const getPosts = async () => {
@@ -60,11 +61,11 @@ export default {
         }
 
         const scrollHandle = () => {
-            const content = document.querySelector('.content')
+            //const content = document.querySelector('.content')
             //const smoothBlock = content.querySelector('div').firstElementChild
             //const smoothBlockRect = smoothBlock.getBoundingClientRect()
             const blockRect = scrollBlock.value.getBoundingClientRect(); // получаем координаты блока
-            const contentWindowHeight = content.offsetHeight; // получаем высоту окна браузера
+            const contentWindowHeight = content.value.offsetHeight; // получаем высоту окна блока прокрутки
             const bottomOffset = blockRect.bottom - contentWindowHeight - 500; // определяем расстояние от нижней границы блока до нижней границы окна
             if (bottomOffset <= 0) {
                 if (currentPage.value <= pages.value) {

@@ -70,11 +70,20 @@ class AdminPostsController extends Controller
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function show(Post $post)
+    public function show(Request $request)
     {
-        $posts = AdminPostsResource::collection(Post::orderBy('created_at', 'desc')->get());
+        $perPage = 9;
+        $page = $request->query('page', 1);
 
-        return $posts;
+        $posts = AdminPostsResource::collection(Post::orderBy('showId', 'asc')->paginate($perPage, ['*'], 'page', $page));
+
+        return response()->json([
+            'posts' => $posts,
+            'pagination' => [
+                'totalPages' => $posts->lastPage(),
+                'currentPage' => $page,
+            ],
+        ]);
     }
 
     public function findPost($id) {
