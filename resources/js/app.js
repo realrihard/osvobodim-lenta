@@ -2,9 +2,9 @@ import './bootstrap';
 
 import { createApp } from 'vue'
 
-import Gallery from './components/Gallery.vue'
+import App from './views/App.vue'
 
-createApp(Gallery).mount('#app')
+createApp(App).mount('#app')
 
 
 

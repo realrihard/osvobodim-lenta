@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import {  ref } from 'vue';
+import { ref } from 'vue';
 import EditPost from './post/EditPost.vue';
 import DeletePost from './post/DeletePost.vue';
 import { useDashboardStore } from '../../../js/store/dashboard.js'

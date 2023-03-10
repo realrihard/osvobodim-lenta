@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\PostController;
+use App\Http\Controllers\PostsController;
+use App\Http\Controllers\AdminPostsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,19 +15,15 @@ use App\Http\Controllers\PostController;
 |
 */
 
-Route::get('/', [PostController::class, 'show'])->name('index');
-Route::get('/grid-1', function() {
-    return view('grid1');
-});
-Route::get('/grid-2', [PostController::class, 'index'])->name('grid-2');
-Route::get('/waterfall', function() {
+Route::get('/', function() {
     return view('index');
 });
+Route::get('/posts', [PostsController::class, 'index']);
 
 Route::group(['middleware' => 'auth:sanctum'], function() {
-    Route::get('/admin', [PostController::class, 'index'])->name('admin.dashboard');
-    Route::get('/admin/create', [PostController::class, 'create'])->name('create');
-    Route::post('/admin/store', [PostController::class, 'store'])->name('store');
+    Route::get('/admin', function() {
+        return view('admin.dashboard');
+    });
 });
 
 Auth::routes();

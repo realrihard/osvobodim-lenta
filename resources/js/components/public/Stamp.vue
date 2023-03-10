@@ -1,8 +1,10 @@
 <template>
-    <div class="stamp is_approved">Списано <br><span>1 000 000 руб</span></div>
+    <div class="stamp is_approved">Списано <br><span>{{ formatedSuma }}</span></div>
 </template>
 
 <script>
+import { computed } from 'vue'
+
 export default {
     props: {
         suma: {
@@ -10,9 +12,12 @@ export default {
             default: null
         }
     },
-    setup() {
+    setup(prop) {
+        const formatedSuma = computed(() => {
+            return prop.suma.toLocaleString('ru-RU', { style: 'currency', currency: 'RUB', minimumFractionDigits: 0 })
+        })
         return {
-
+            formatedSuma
         }
     },
 }
@@ -24,23 +29,23 @@ export default {
     color: #555;
     font-size: 3rem;
     font-weight: 700;
-    border: 0.25rem solid #555;
+    border: 1rem solid #555;
     display: inline-block;
-    padding: 0.25rem 1rem;
+    padding: 0.5rem 2.5rem;
     text-transform: uppercase;
     text-align: center;
     border-radius: 1rem;
     font-family: 'Courier';
-    -webkit-mask-image: url('../../../../../public/images/assets/grunge.png');
+    -webkit-mask-image: url('../../../../public/images/assets/grunge.png');
     -webkit-mask-size: 944px 604px;
     mix-blend-mode: multiply;
 }
 
 .is_approved {
-    color: #0A9928;
-    border: 0.5rem solid #0A9928;
+    color: #ff0000;
+    border: 0.75rem solid #ff0000;
     -webkit-mask-position: 13rem 6rem;
-    transform: rotate(-14deg);
+    transform: rotate(-8deg);
     border-radius: 0;
 }
 </style>

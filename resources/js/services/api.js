@@ -30,6 +30,23 @@ export default class apiData {
         }
     }
 
+    static async findPost(postId) {
+        try {
+            const data = await axios.get("/sanctum/csrf-cookie").then(resp => {
+                return axios.get('/api/find/' + postId)
+                    .then((response) => {
+                        return response.data.post
+                    })
+                    .catch(error => {
+                        console.log(error.response.data);
+                    });
+            })
+            return data
+        } catch (err) {
+            return err
+        }
+    }
+
     static async editPost(postId, formData) {
         try {
             const data = await axios.get("/sanctum/csrf-cookie").then(resp => {

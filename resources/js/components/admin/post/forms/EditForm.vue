@@ -6,7 +6,7 @@
                         <div v-if="!file && !form.image" class="upload__input__sign"><i class='bx bx-upload'></i><span>Загрузить файл</span></div>
                         <div class="upload__preview" v-else>
                             <div class="upload__preview__panel">
-                                    <i class='bx bx-refresh'></i>
+                                <i class='bx bx-refresh'></i>
                             </div>
                             <img
                                 :src="imageFile"
@@ -24,7 +24,7 @@
                 </div>
                 <div class="form__group">
                     <label for="suma">Сума списания <i>(необязательное поле)</i></label>
-                    <input type="text" id="suma" name="suma" v-model="form.suma">
+                    <input type="text" id="suma" name="suma" v-model.number="form.suma">
                 </div>
                 <button type="submit">Отправить</button>
         </div>
@@ -37,8 +37,9 @@ import apiData from '../../../../services/api.js'
 import { useDashboardStore } from '../../../../store/dashboard.js'
 
 export default {
-    setup() {
+    setup(props, context) {
         const store = useDashboardStore()
+        const formStart = ref({})
         const form = ref({
             id: '',
             description: '',
@@ -55,6 +56,7 @@ export default {
         });
 
         onMounted (() => {
+            formStart.value = {...store.editedPost}
             form.value = store.editedPost
             imageFile.value = '/images/thumb/' + form.value.image
         })
@@ -102,6 +104,7 @@ export default {
 
         return {
             store,
+            formStart,
             form,
             uploadInput,
             file,

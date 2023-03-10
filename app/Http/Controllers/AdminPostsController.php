@@ -6,11 +6,11 @@ use App\Models\Post;
 use Spatie\PdfToImage\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
-use App\Http\Resources\PostResource;
+use App\Http\Resources\AdminPostsResource;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 
-class PostController extends Controller
+class AdminPostsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -72,11 +72,18 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        $posts = PostResource::collection(Post::orderBy('created_at', 'desc')->get());
+        $posts = AdminPostsResource::collection(Post::orderBy('created_at', 'desc')->get());
 
         return $posts;
     }
 
+    public function findPost($id) {
+        $post = Post::find($id);
+
+        return response()->json([
+            'data' => $post
+        ]);
+    }
     /**
      * Show the form for editing the specified resource.
      *
