@@ -20,6 +20,9 @@ export const useDashboardStore = defineStore('store', {
             this.posts.push(...data.posts)
             this.pagination = data.pagination
         },
+        changePostsSort(posts) {
+            this.posts = posts
+        },
         getPanelSettings(visible, title, type) {
             this.panelSettings.visible = visible
             this.panelSettings.title = title

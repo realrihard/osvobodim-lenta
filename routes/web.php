@@ -22,7 +22,7 @@ Route::get('/posts', [PostsController::class, 'index']);
 
 Route::group(['middleware' => 'auth:sanctum'], function() {
     Route::get('/admin', function() {
-        return view('admin.dashboard');
+        return view('dashboard');
     });
 });
 

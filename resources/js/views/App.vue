@@ -1,24 +1,35 @@
 <template>
     <Smoothie class="content">
+        <div class="hero">
+            <div class="hero__wrapper">
+                <div class="area" >
+                    <ul class="circles">
+                        <li v-for="n in 10" :key="n"></li>
+                    </ul>
+                </div>
+                <!--<div class="hero__image__layer">
+                    <div class="hero__frame"><img src="../../../public/images/assets/frame.png" alt=""></div>
+                </div>-->
+                <div class="container">
+                    <hero />
+                </div>
+            </div>
+        </div>
         <div class="container">
-            <header-comp />
-            <hero />
             <gallery />
         </div>
     </Smoothie>
 </template>
 
 <script>
-import HeaderComp from '../components/public/HeaderComp.vue';
 import Hero from '../components/public/Hero.vue';
 import Gallery from '../components/public/Gallery.vue';
-import { onMounted, shallowRef } from 'vue';
+import { onMounted} from 'vue';
 import { Smoothie } from 'vue-smoothie'
 
 
 export default {
     components: {
-        HeaderComp,
         Hero,
         Gallery,
         Smoothie

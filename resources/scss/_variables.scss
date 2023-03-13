@@ -1,0 +1,22 @@
+$base-font-size: 16;
+
+// strips away any unit from a value: e.g. "16px" => 16
+@function strip-unit($number) {
+    @if type-of($number)=='number'and not unitless($number) {
+        @return calc($number / ($number * 0 + 1));
+    }
+
+    @return $number;
+}
+
+@function px-to-rem($size, $base: $base-font-size) {
+    $pxUnitless: strip-unit($size);
+    @return #{calc($pxUnitless / $base)}rem;
+}
+
+:root {
+    --body-bg: #f3f3f3;
+
+    // Typography
+    --accent-text-font: 24px;
+}

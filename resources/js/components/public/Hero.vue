@@ -1,11 +1,23 @@
 <template>
-    <div class="hero">
-        <div>Сумма списанных задолженностей: {{ total.mainsum }}</div>
-        <div>За последние 7 дней: {{ total.day7 }}</div>
-        <div>За последние 30 дней: {{ total.day30 }}</div>
-        <div>Клиентов освобождено: {{ total.clients }}</div>
-
-        <a href="https://osvobodim.com">На сайт</a>
+    <div class="hero__content">
+        <div class="hero__image">
+            <img src="../../../../public/images/assets/frame.png" alt="">
+        </div>
+        <div class="hero__info__wrapper">
+            <div class="hero__info">
+                <div class="hero__info__block">
+                    <div class="hero__info__item">Сумма списанных задолженностей:<br> <span class="text_big text_action">{{ total.mainsum }}</span></div>
+                    <div class="hero__info__item">За последние 7 дней:<br> <span class="text_middle text_blue">{{ total.day7 }}</span></div>
+                    <div class="hero__info__item">За последние 30 дней:<br> <span class="text_middle text_blue">{{ total.day30 }}</span></div>
+                    <div class="hero__info__item">Клиентов освобождено:<br> <span class="text_middle text_blue">{{ total.clients }}</span></div>
+                </div>
+                <div class="more__wrapper"><a href="https://osvobodim.com" class="more__btn">На сайт</a></div>
+            </div>
+        </div>
+    </div>
+    <div class="hero__bottom">
+        <p>Листайте ниже чтобы ознакомиться<br> с результатоми нашей работы</p>
+        <div class="mouse"></div>
     </div>
 </template>
 

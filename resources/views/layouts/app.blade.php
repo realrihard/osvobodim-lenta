@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
     @vite(['resources/scss/app.scss', 'resources/js/app.js'])
-    <title>Document</title>
+    <title>Освободим</title>
 </head>
 
 <body>

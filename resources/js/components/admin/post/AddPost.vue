@@ -1,6 +1,6 @@
 <template>
     <div class="add__btn__wrapper">
-        <button class="btn" @click="addPost">Добавить пост</button>
+        <i class='bx bx-plus add__btn' @click="addPost"></i>
     </div>
 </template>
 
@@ -22,10 +22,3 @@ export default {
     },
 }
 </script>
-
-<style lang="scss" scoped>
-.add__btn__wrapper {
-    max-width: 300px;
-    justify-self: center;
-}
-</style>

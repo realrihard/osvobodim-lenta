@@ -1,7 +1,6 @@
 <template>
     <transition name="slide-up">
         <div class="panel" v-if="store.panelSettings.visible">
-            {{ store.editedPost }}
             <div class="panel__header">
                 <div class="panel__title">
                     <h3>{{ store.panelSettings.title }}</h3>

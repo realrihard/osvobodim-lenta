@@ -1,5 +1,7 @@
 @import '../../node_modules/modern-normalize/modern-normalize.css';
 
+@import './forms_admin';
+
 html,
 body,
 #app {
@@ -7,11 +9,11 @@ body,
 }
 
 html {
-    font-size: 8px;
+    font-size: 16px;
 }
 
 body {
-    font-size: 2rem;
+    font-size: 1rem;
 }
 
 .container {
@@ -26,82 +28,158 @@ body {
     margin-bottom: 4rem;
 }
 
-input {
-    outline: 0;
-    border: solid 1px #dbdbdb;
-    padding: 16px 16px;
-    border-radius: 8px;
+/* Login Form */
+.login {
+    &__wrapper {
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
 
-    &:focus {
-        border: solid 1px #5094de;
+    &__block {
+        width: 100%;
+        max-width: 300px;
+        border: solid 1px #dbdbdb;
+        border-radius: 15px;
+        padding: 30px;
+    }
+
+    &__logo {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        margin-bottom: 30px;
+
+        img {
+            width: 80%;
+        }
     }
 }
 
-textarea {
-    outline: 0;
-    border: solid 1px #dbdbdb;
-    padding: 16px 16px;
-    border-radius: 8px;
-    resize: none;
-
-    &:focus {
-        border: solid 1px #5094de;
-    }
-}
-
-.btn {
+.content {
     width: 100%;
+    height: 100%;
 }
 
-.service__btn {
+.header {
     display: flex;
+    height: 80px;
+    justify-content: space-between;
     align-items: center;
+    border-bottom: solid 1px #dbdbdb;
+    margin-bottom: 30px;
+
+    &__menu {
+        padding: 0;
+        list-style: none;
+    }
+}
+
+/* Data table */
+.dashboard__list {
+    width: 100%;
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 364px));
+    gap: 2rem;
+
+    &__item {
+        aspect-ratio: auto 1 / 1;
+        overflow: hidden;
+        border-radius: 1rem;
+    }
+}
+
+.post__deleted {
+    transform: scale(0);
+    transform-origin-x: left;
+    transform-origin-y: top;
+    animation: scale-down 0.3s forwards;
+}
+
+@keyframes scale-down {
+    from {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    to {
+        transform: scale(0);
+        opacity: 0;
+    }
+}
+
+.item {
+    &__box {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        min-width: 364px;
+        margin-bottom: 2rem;
+
+        &:hover,
+        &:focus,
+        &:active {
+            .item__settings {
+                opacity: 1;
+            }
+        }
+    }
+
+    &__image {
+        width: 100%;
+        aspect-ratio: auto 1 / 1;
+        background-size: cover;
+        background-position: center;
+    }
+
+    &__settings {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: rgba(256, 256, 256, 0.6);
+        opacity: 1;
+        transition: opacity .3s ease-in-out;
+
+        &__buttons {
+            display: flex;
+            gap: 10px;
+        }
+    }
+}
+
+.add__btn__wrapper {
+    width: 100%;
+    display: flex;
     justify-content: center;
-    width: 60px;
-    height: 60px;
-    font-size: 24px;
-    border: none;
-    border-radius: 8px;
-    overflow: hidden;
+}
+
+.add__btn {
+    width: 100%;
+    max-width: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 24px 56px;
+    text-align: center;
+    font-size: 48px;
+    line-height: 1;
+    background-color: transparent;
+    border: dashed 4px #dbdbdb;
+    border-radius: 16px;
+    color: #444;
 
     &:hover {
+        background-color: #f3f3f3;
+        transition: background .3s ease;
         cursor: pointer;
     }
-}
-
-.btn_primary {
-    background-color: #5094de;
-    color: #fff;
-    transition: background .3s ease-in-out;
-
-    &:hover {
-        background-color: hsl(211.2676056338028deg 68.26923076923077% 49.21568627450981%);
-        transition: background .3s ease-in-out;
-    }
-
-    &:disabled {
-        background-color: white;
-        color: #8796a7
-    }
-}
-
-.btn_danger {
-    background-color: #e4293e;
-    color: #fff;
-    transition: background .3s ease-in-out;
-
-    &:hover {
-        background-color: hsl(353.2620320855615deg 77.59336099585063% 42.74509803921569%);
-        transition: background .3s ease-in-out;
-    }
-
-    &:disabled {
-        background-color: hsl(353.2620320855615deg 15% 52.74509803921569%)
-    }
-}
-
-.dashboard__wrapper {
-    width: 100vw;
-    height: 100vh;
-    overflow: hidden;
 }

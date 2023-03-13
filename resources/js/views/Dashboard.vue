@@ -1,14 +1,6 @@
 <template>
-    <Smoothie class="content">
         <div class="container">
-            <header-comp />
-
-            {{ store.pagination }}
-            <div class="space">
-                <h1>
-                    Посты на странице
-                </h1>
-            </div>
+            {{ store.posts }}
             <div class="space">
                 <add-post />
             </div>
@@ -18,18 +10,12 @@
                 />
             </div>
         </div>
-    </Smoothie>
-
-    <post-panel />
 </template>
 
 <script>
 import 'boxicons/css/boxicons.min.css'
-import { Smoothie } from 'vue-smoothie';
 import { onMounted, onUnmounted, ref } from 'vue';
-import HeaderComp from '../components/admin/HeaderComp.vue';
 import DataTable from '../components/admin/DataTable.vue'
-import PostPanel from '../components/admin/post/PostPanel.vue';
 import AddPost from '../components/admin/post/AddPost.vue';
 import { useDashboardStore } from '../store/dashboard';
 import apiData from '../services/api.js';
@@ -37,10 +23,7 @@ import apiData from '../services/api.js';
 export default {
     components: {
         DataTable,
-        PostPanel,
         AddPost,
-        Smoothie,
-        HeaderComp
     },
     props: {
         posts: {
@@ -52,6 +35,7 @@ export default {
         const store = useDashboardStore();
         const content = ref(null);
         const scrollBlock = ref(null)
+        const loadedPages = ref([1])
 
         onMounted(async () => {
             const scrollPosition = window.sessionStorage.getItem('scrollPosition');
@@ -72,17 +56,19 @@ export default {
             const blockRect = scrollBlock.value.getBoundingClientRect(); // получаем координаты блока
             const contentWindowHeight = content.value.offsetHeight; // получаем высоту окна блока прокрутки
             const bottomOffset = blockRect.bottom - contentWindowHeight - 300; // определяем расстояние от нижней границы блока до нижней границы окна
-            if (bottomOffset <= 0) {
-                if (store.pagination.currentPage < store.pagination.totalPages) {
+            if (bottomOffset <= 0 && !loadedPages.value.includes(store.pagination.currentPage)) {
+                if (store.pagination.currentPage < store.pagination.totalPages && !loadedPages.value.includes(store.pagination.currentPage)) {
                     const currentPage = Number(store.pagination.currentPage) + 1
                     const newPosts = await apiData.getData(currentPage)
                     store.getNewPosts(newPosts)
+                    loadedPages.value.push(store.pagination.currentPage)
                 }
             }
         }
 
         return {
             store,
+            loadedPages,
             scrollBlock,
             scrollHandle,
         }
