@@ -13,6 +13,9 @@ export const useDashboardStore = defineStore('store', {
     }),
     actions: {
         getPosts(data) {
+            data.posts.forEach(post => {
+                post['showSettings'] = false
+            })
             this.posts = data.posts
             this.pagination = data.pagination
         },
@@ -59,6 +62,17 @@ export const useDashboardStore = defineStore('store', {
                     this.posts.splice(index, 1)
                 }, 500);
             }
+        },
+        showPostSettings(post) {
+            console.log(post)
+            const index = this.posts.findIndex(p => p === post)
+            if (index !== -1) {
+                this.posts = this.posts.map((p, i) => {
+                    p.showSettings = i === index ? !p.showSettings : false
+                    return p
+                })
+            }
         }
+
     }
 })

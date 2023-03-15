@@ -19,7 +19,7 @@ class PostsController extends Controller
         $perPage = 5;
         $page = $request->query('page', 1);
 
-        $posts = PostsResource::collection(Post::orderBy('showId', 'asc')->paginate($perPage, ['*'], 'page', $page));
+        $posts = PostsResource::collection(Post::orderBy('showId', 'desc')->paginate($perPage, ['*'], 'page', $page));
 
         return response()->json([
             'posts' => $posts,

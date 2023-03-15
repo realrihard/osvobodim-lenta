@@ -26,7 +26,7 @@
                     <label for="suma">Сума списания <i>(необязательное поле)</i></label>
                     <input type="text" id="suma" name="suma" v-model.number="form.suma">
                 </div>
-                <button type="submit">Отправить</button>
+                <button type="submit" class="btn_primary send__btn" style="margin: 0 auto">Отправить</button>
         </div>
     </form>
 </template>

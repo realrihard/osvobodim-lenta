@@ -71,9 +71,6 @@ export default {
         }
 
         const scrollHandle = () => {
-            //const content = document.querySelector('.content')
-            //const smoothBlock = content.querySelector('div').firstElementChild
-            //const smoothBlockRect = smoothBlock.getBoundingClientRect()
             const blockRect = scrollBlock.value.getBoundingClientRect(); // получаем координаты блока
             const contentWindowHeight = content.value.offsetHeight; // получаем высоту окна блока прокрутки
             const bottomOffset = blockRect.bottom - contentWindowHeight - 600; // определяем расстояние от нижней границы блока до нижней границы окна

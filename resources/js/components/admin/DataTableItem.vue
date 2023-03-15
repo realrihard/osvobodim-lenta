@@ -1,8 +1,8 @@
 <template>
-        <div class="item__box" @click="toggleSettings">
-            <div class="item__image" :style="{ backgroundImage: 'url(/images/thumb/' + post.image + ')'}">
+        <div class="item__box" @click="toggleSettings(post)">
+            <div class="item__image" :style="{ backgroundImage: 'url(images/thumb/' + post.image + ')'}">
             </div>
-            <div class="item__settings" v-if="showSettings">
+            <div class="item__settings" v-if="post.showSettings">
                 <div class="item__settings__buttons">
                     <edit-post :post="post"/>
                     <delete-post :postId="post.id"/>
@@ -37,8 +37,9 @@ export default {
         })
         const showSettings = ref(false)
 
-        const toggleSettings = () => {
+        const toggleSettings = (post) => {
             showSettings.value = !showSettings.value;
+            store.showPostSettings(post)
         }
 
         return {

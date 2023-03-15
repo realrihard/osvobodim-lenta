@@ -1,9 +1,9 @@
 <template>
         <draggable
-            v-model="postsArray"
+            v-model="store.posts"
             group="posts"
             @start="drag=true"
-            @end="drag=false"
+            @end="drag=false,dragChange($event)"
 
             item-key="showId"
             class="dashboard__list"
@@ -43,15 +43,34 @@ export default defineComponent ({
                 newValue.forEach((obj, index) => {
                     obj.showId = index;
                 });
-                store.changePostsSort(newValue)
-                apiData.updatePostOrder(newValue)
+                //store.changePostsSort(newValue)
+                //apiData.updatePostOrder(newValue)
             }
         })
+
+        const dragChange = (element) => {
+            const indexes = [element.oldIndex, element.newIndex]
+
+            const firstPostIndex = store.posts.findIndex(post => post.showId === element.oldIndex)
+            const secondPostIndex = store.posts.findIndex(post => post.showId === element.newIndex)
+
+            const posts = [...store.posts]
+            const firstShowId = posts[firstPostIndex]['showId']
+            const secondShowId = posts[secondPostIndex]['showId']
+            console.log(posts[firstPostIndex])
+            console.log(firstPostIndex, secondPostIndex)
+            posts[firstPostIndex]['showId'] = secondShowId
+            posts[secondPostIndex]['showId'] = firstShowId
+            console.log(posts)
+            store.refreshPost(posts)
+            apiData.updatePostOrder(posts)
+        }
 
         return {
             store,
             drag,
-            postsArray,
+            //postsArray,
+            dragChange
         }
     },
 })

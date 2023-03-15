@@ -26,7 +26,7 @@
                         <label for="suma">Сума списания <i>(необязательное поле)</i></label>
                         <input type="text" id="suma" name="suma" v-model="form.suma">
                     </div>
-                    <button type="submit">Отправить</button>
+                    <button type="submit" class="btn_primary send__btn" style="margin: 0 auto">Отправить</button>
             </div>
         </form>
 </template>
@@ -71,10 +71,10 @@ export default {
             } else {
                 console.log('Отправка данных прошла успешно', response);
                 const newObject = {};
-                newObject.id = response.id
+                newObject.id = response.post.id
                 newObject.description = form.value.description
                 newObject.suma = form.value.suma
-                newObject.image = response.image
+                newObject.image = response.post.image
                 store.addPost(newObject)
                 store.getPanelSettings(false, null, null)
             }
@@ -100,124 +100,3 @@ export default {
     }
 }
 </script>
-
-<style lang="scss" scoped>
-.form__container {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    row-gap: 50px;
-    max-width: 600px;
-    width: 100%;
-    padding: 0 15px;
-    margin: 0 auto;
-}
-
-.upload {
-    &__input {
-        width: 100%;
-
-        label {
-            background-color: #f9f9f9;
-            border: dashed 3px #dbdbdb;
-            border-radius: 15px;
-            height: 200px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-            transition: background .3s ease-in-out;
-
-            &.with__preview {
-                background-color: transparent;
-                border: none;
-                height: 400px;
-            }
-
-            &:hover {
-                cursor: pointer;
-                background-color: #e9e9e9;
-                transition: background .3s ease-in-out;
-            }
-        }
-
-        input {
-            display: none;
-        }
-        &:hover {
-            .upload__preview__panel {
-                opacity: 1;
-                transition: opacity .5s ease-in-out;
-            }
-        }
-
-        &__sign {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-
-            i {
-                font-size: 60px;
-                color: #646464;
-            }
-        }
-    }
-    &__preview {
-        position: relative;
-        width: 100%;
-        height: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-
-        img {
-            &.width__bigger {
-                width: 100%;
-            }
-            &.height__bigger {
-                height: 100%;
-            }
-        }
-
-        &__panel {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            background-color: rgba(0,0,0, .5);
-            z-index: 10;
-            transition: opacity .3s ease-in-out;
-        }
-
-        &__controls {
-            display: flex;
-            width: 50%;
-            height: 100px;
-            justify-content: space-around;
-        }
-    }
-}
-.form__group {
-    display: flex;
-    flex-direction: column;
-
-    label {
-        font-weight: 700;
-        margin-bottom: 20px;
-    }
-}
-.bx {
-    font-size: 60px;
-    color: #fff;
-    z-index: 11;
-}
-.control__btn {
-    padding: 20px 30px;
-    background-color: #fff;
-}
-</style>

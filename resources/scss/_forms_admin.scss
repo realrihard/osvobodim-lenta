@@ -2,10 +2,9 @@
     width: 100%;
     display: flex;
     flex-direction: column;
-    margin-bottom: 20px;
 
     label {
-        margin-bottom: 10px;
+        margin-bottom: 15px;
         font-weight: 700;
     }
 }
@@ -61,6 +60,7 @@ textarea {
     &:hover {
         background-color: hsl(211.2676056338028deg 68.26923076923077% 49.21568627450981%);
         transition: background .3s ease-in-out;
+        cursor: pointer;
     }
 
     &:disabled {

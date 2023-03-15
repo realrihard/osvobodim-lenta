@@ -1,6 +1,17 @@
 <template>
     <Smoothie class="content">
         <div class="hero">
+            <div class="header">
+                <div class="container">
+                    <div class="header__block">
+                        <div class="logo"><img src="../../../public/images/assets/logo.svg"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="bg__forms">
+                <div class="circle_mid"></div>
+                <div class="circle_bg"></div>
+            </div>
             <div class="hero__wrapper">
                 <div class="area" >
                     <ul class="circles">

@@ -9,7 +9,6 @@ import Dashboard from './views/Dashboard.vue'
 const dashboard = createApp({})
 
 dashboard.use(createPinia())
-dashboard.component('Smoothie', Smoothie)
 dashboard.component('dashboard', Dashboard)
 dashboard.component('post-panel', PostPanel)
 

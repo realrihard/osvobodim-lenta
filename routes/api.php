@@ -12,7 +12,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::group(['middleware' => 'auth:sanctum'], function() {
     Route::get('/posts/show', [AdminPostsController::class, 'show']);
     Route::get('/posts/find/{id}', [AdminPostsController::class, 'findPost']);
-    Route::post('/posts/add', [AdminPostsController::class, 'store']);
+    Route::post('/posts/add', [AdminPostsController::class, 'create']);
     Route::post('/posts/edit/{id}', [AdminPostsController::class, 'edit']);
     Route::post('/posts/change-post-order', [AdminPostsController::class, 'updatePostOrder']);
     Route::delete('/posts/delete/{id}', [AdminPostsController::class, 'destroy']);

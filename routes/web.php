@@ -26,4 +26,6 @@ Route::group(['middleware' => 'auth:sanctum'], function() {
     });
 });
 
+Route::get('/posts/show', [AdminPostsController::class, 'show']);
+
 Auth::routes();

@@ -1,6 +1,5 @@
 <template>
         <div class="container">
-            {{ store.posts }}
             <div class="space">
                 <add-post />
             </div>
@@ -10,17 +9,21 @@
                 />
             </div>
         </div>
+        <transition name="slide-up">
+            <post-panel v-if="store.panelSettings.visible"/>
+        </transition>
 </template>
 
 <script>
 import 'boxicons/css/boxicons.min.css'
-import { onMounted, onUnmounted, ref } from 'vue';
+import { defineComponent, onMounted, onUnmounted, ref } from 'vue';
 import DataTable from '../components/admin/DataTable.vue'
 import AddPost from '../components/admin/post/AddPost.vue';
 import { useDashboardStore } from '../store/dashboard';
 import apiData from '../services/api.js';
 
-export default {
+export default defineComponent({
+    name: 'dashboard',
     components: {
         DataTable,
         AddPost,
@@ -44,8 +47,7 @@ export default {
             }
 
             store.getPosts(await apiData.getData())
-            content.value = document.querySelector('.content')
-            content.value.addEventListener('scroll', scrollHandle)
+            window.addEventListener('scroll', scrollHandle)
         })
 
         onUnmounted (() => {
@@ -54,14 +56,15 @@ export default {
 
         const scrollHandle = async () => {
             const blockRect = scrollBlock.value.getBoundingClientRect(); // получаем координаты блока
-            const contentWindowHeight = content.value.offsetHeight; // получаем высоту окна блока прокрутки
-            const bottomOffset = blockRect.bottom - contentWindowHeight - 300; // определяем расстояние от нижней границы блока до нижней границы окна
-            if (bottomOffset <= 0 && !loadedPages.value.includes(store.pagination.currentPage)) {
-                if (store.pagination.currentPage < store.pagination.totalPages && !loadedPages.value.includes(store.pagination.currentPage)) {
+            const contentWindowHeight = window.innerHeight; // получаем высоту окна блока прокрутки
+            const bottomOffset = blockRect.bottom - contentWindowHeight - 10; // определяем расстояние от нижней границы блока до нижней границы окна
+            console.log(!loadedPages.value.includes(store.pagination.currentPage))
+            if (bottomOffset <= 0) {
+                if (store.pagination.currentPage < store.pagination.totalPages) {
                     const currentPage = Number(store.pagination.currentPage) + 1
                     const newPosts = await apiData.getData(currentPage)
                     store.getNewPosts(newPosts)
-                    loadedPages.value.push(store.pagination.currentPage)
+                    loadedPages.value.push(currentPage)
                 }
             }
         }
@@ -73,7 +76,7 @@ export default {
             scrollHandle,
         }
     },
-}
+})
 </script>
 
 <style scoped>
@@ -81,4 +84,6 @@ export default {
     width: 100%;
     height: 100vh;
 }
+
+
 </style>

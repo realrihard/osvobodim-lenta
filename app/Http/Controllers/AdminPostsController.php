@@ -29,9 +29,32 @@ class AdminPostsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        return view('create');
+        $request->validate([
+            'suma' => 'nullable|regex:/^[0-9]+$/',
+            'image' => 'required|file|max:2048'
+        ]);
+
+        $imagePath = $this->uploadImage($request->image);
+
+        $lastShowId = Post::max('showId');
+        if (isset($lastShowId)) {
+            $lastShowId++;
+        } else {
+            $lastShowId = 0;
+        }
+
+        $post = Post::create([
+            'description' => optional($request->input('description'))->isEmpty() ? null : $request->input('description'),
+            'suma' => optional($request->input('suma'))->isEmpty() ? null : $request->input('suma'),
+            'image' => $imagePath,
+            'showId' => $lastShowId
+        ]);
+
+        return response()->json([
+            'message' => 'Пост был добавлен',
+            'post' => $post],201);
     }
 
     /**
@@ -40,28 +63,9 @@ class AdminPostsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store()
     {
-        $request->validate([
-            'description' => 'nullable',
-            'suma' => 'nullable|regex:/^[0-9]+$/',
-            'image' => 'required|file|max:2048'
-        ]);
-
-        Log::info('Validation passed');
-
-        $imagePath = $this->uploadImage($request->image);
-
-        $lastShowId = Post::latest()->value('showId');
-
-        $post = Post::create([
-            'description' => optional($request->input('description'))->isEmpty() ? null : $request->input('description'),
-            'suma' => optional($request->input('suma'))->isEmpty() ? null : $request->input('description'),
-            'image' => $imagePath,
-            'showId' => $lastShowId + 1
-        ]);
-
-        return response()->json($post, 201);
+        //
     }
 
     /**
@@ -75,7 +79,7 @@ class AdminPostsController extends Controller
         $perPage = 9;
         $page = $request->query('page', 1);
 
-        $posts = AdminPostsResource::collection(Post::orderBy('showId', 'asc')->paginate($perPage, ['*'], 'page', $page));
+        $posts = AdminPostsResource::collection(Post::orderBy('showId', 'desc')->paginate($perPage, ['*'], 'page', $page));
 
         return response()->json([
             'posts' => $posts,
