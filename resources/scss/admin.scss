@@ -44,6 +44,13 @@ body {
         border: solid 1px #dbdbdb;
         border-radius: 15px;
         padding: 30px;
+
+        form {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
     }
 
     &__logo {
