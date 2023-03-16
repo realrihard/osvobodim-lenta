@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('content')
-    <div id="app" class="content">
+    <div class="content">
         <div class="container">
             <div class="header">
                 <ul class="header__menu">
@@ -26,7 +26,9 @@
             </div>
         </div>
 
-        <dashboard></dashboard>
+        <div id="dashboard">
+
+        </div>
 
 
     </div>

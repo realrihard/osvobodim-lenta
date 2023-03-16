@@ -16,14 +16,13 @@
 
 <script>
 import 'boxicons/css/boxicons.min.css'
-import { defineComponent, onMounted, onUnmounted, ref } from 'vue';
+import { onMounted, onUnmounted, ref } from 'vue';
 import DataTable from '../components/admin/DataTable.vue'
 import AddPost from '../components/admin/post/AddPost.vue';
 import { useDashboardStore } from '../store/dashboard';
 import apiData from '../services/api.js';
 
-export default defineComponent({
-    name: 'dashboard',
+export default {
     components: {
         DataTable,
         AddPost,
@@ -76,7 +75,7 @@ export default defineComponent({
             scrollHandle,
         }
     },
-})
+}
 </script>
 
 <style scoped>

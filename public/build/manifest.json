@@ -31,7 +31,7 @@
     "src": "public/images/assets/logo.svg"
   },
   "resources/js/admin.css": {
-    "file": "assets/admin-5704b2c7.css",
+    "file": "assets/admin-71006fe7.css",
     "src": "resources/js/admin.css"
   },
   "resources/js/admin.js": {
@@ -43,9 +43,9 @@
       "assets/boxicons-3fe502d8.svg"
     ],
     "css": [
-      "assets/admin-5704b2c7.css"
+      "assets/admin-71006fe7.css"
     ],
-    "file": "assets/admin-2dcbdbb5.js",
+    "file": "assets/admin-aa45240f.js",
     "imports": [
       "__plugin-vue_export-helper-0a7ba489.js"
     ],
