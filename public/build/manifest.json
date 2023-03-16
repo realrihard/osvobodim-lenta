@@ -1,4 +1,27 @@
 {
+  "__plugin-vue_export-helper-0a7ba489.js": {
+    "file": "assets/_plugin-vue_export-helper-0a7ba489.js"
+  },
+  "node_modules/boxicons/fonts/boxicons.eot": {
+    "file": "assets/boxicons-c23887bb.eot",
+    "src": "node_modules/boxicons/fonts/boxicons.eot"
+  },
+  "node_modules/boxicons/fonts/boxicons.svg": {
+    "file": "assets/boxicons-3fe502d8.svg",
+    "src": "node_modules/boxicons/fonts/boxicons.svg"
+  },
+  "node_modules/boxicons/fonts/boxicons.ttf": {
+    "file": "assets/boxicons-47509a2d.ttf",
+    "src": "node_modules/boxicons/fonts/boxicons.ttf"
+  },
+  "node_modules/boxicons/fonts/boxicons.woff": {
+    "file": "assets/boxicons-d5d511cf.woff",
+    "src": "node_modules/boxicons/fonts/boxicons.woff"
+  },
+  "node_modules/boxicons/fonts/boxicons.woff2": {
+    "file": "assets/boxicons-4b87cbc7.woff2",
+    "src": "node_modules/boxicons/fonts/boxicons.woff2"
+  },
   "public/images/assets/frame.png": {
     "file": "assets/frame-a5c83d5a.png",
     "src": "public/images/assets/frame.png"
@@ -7,10 +30,27 @@
     "file": "assets/logo-dcdeb54c.svg",
     "src": "public/images/assets/logo.svg"
   },
-  "resources/css/app.css": {
-    "file": "assets/app-e3b0c442.css",
+  "resources/js/admin.css": {
+    "file": "assets/admin-5704b2c7.css",
+    "src": "resources/js/admin.css"
+  },
+  "resources/js/admin.js": {
+    "assets": [
+      "assets/boxicons-c23887bb.eot",
+      "assets/boxicons-4b87cbc7.woff2",
+      "assets/boxicons-d5d511cf.woff",
+      "assets/boxicons-47509a2d.ttf",
+      "assets/boxicons-3fe502d8.svg"
+    ],
+    "css": [
+      "assets/admin-5704b2c7.css"
+    ],
+    "file": "assets/admin-2dcbdbb5.js",
+    "imports": [
+      "__plugin-vue_export-helper-0a7ba489.js"
+    ],
     "isEntry": true,
-    "src": "resources/css/app.css"
+    "src": "resources/js/admin.js"
   },
   "resources/js/app.css": {
     "file": "assets/app-48b4b9af.css",
@@ -24,9 +64,17 @@
     "css": [
       "assets/app-48b4b9af.css"
     ],
-    "file": "assets/app-4fece1d7.js",
+    "file": "assets/app-9088afba.js",
+    "imports": [
+      "__plugin-vue_export-helper-0a7ba489.js"
+    ],
     "isEntry": true,
     "src": "resources/js/app.js"
+  },
+  "resources/scss/admin.scss": {
+    "file": "assets/admin-f835731c.css",
+    "isEntry": true,
+    "src": "resources/scss/admin.scss"
   },
   "resources/scss/app.scss": {
     "file": "assets/app-2ca98f70.css",
