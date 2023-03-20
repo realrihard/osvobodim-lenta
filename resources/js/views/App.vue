@@ -1,5 +1,5 @@
 <template>
-    <Smoothie class="content">
+    <div class="content">
         <div class="hero">
             <div class="header">
                 <div class="container">
@@ -29,7 +29,7 @@
         <div class="container">
             <gallery />
         </div>
-    </Smoothie>
+    </div>
 </template>
 
 <script>

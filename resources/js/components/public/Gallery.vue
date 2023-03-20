@@ -1,6 +1,7 @@
 <template>
     <div class="gallery__wrapper" ref="scrollBlock" @scroll="scrollHandle">
         <div class="gallery" >
+            <h3 class="block__title">Наши выигранные дела</h3>
             <template v-for="(item, index) in posts" :key="item.showId">
             <article class="gallery__item">
                 <div class="gallery__item__image">
@@ -48,7 +49,7 @@ export default {
                 pages.value = response.data.pagination.totalPages
             })
             content.value = document.querySelector('.content')
-            content.value.addEventListener('scroll', scrollHandle)
+            window.addEventListener('scroll', scrollHandle)
         })
 
         onUnmounted (() => {
@@ -72,8 +73,8 @@ export default {
 
         const scrollHandle = () => {
             const blockRect = scrollBlock.value.getBoundingClientRect(); // получаем координаты блока
-            const contentWindowHeight = content.value.offsetHeight; // получаем высоту окна блока прокрутки
-            const bottomOffset = blockRect.bottom - contentWindowHeight - 600; // определяем расстояние от нижней границы блока до нижней границы окна
+            const contentWindowHeight = window.innerHeight; // получаем высоту окна блока прокрутки
+            const bottomOffset = blockRect.bottom - contentWindowHeight - 10; // определяем расстояние от нижней границы блока до нижней границы окна
             if (bottomOffset <= 0) {
                 if (currentPage.value <= pages.value) {
                     getNewPosts()
