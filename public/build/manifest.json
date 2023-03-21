@@ -45,7 +45,7 @@
     "css": [
       "assets/admin-71006fe7.css"
     ],
-    "file": "assets/admin-aa45240f.js",
+    "file": "assets/admin-251cb042.js",
     "imports": [
       "__plugin-vue_export-helper-0a7ba489.js"
     ],
@@ -53,7 +53,7 @@
     "src": "resources/js/admin.js"
   },
   "resources/js/app.css": {
-    "file": "assets/app-48b4b9af.css",
+    "file": "assets/app-a3ca1af4.css",
     "src": "resources/js/app.css"
   },
   "resources/js/app.js": {
@@ -62,9 +62,9 @@
       "assets/logo-dcdeb54c.svg"
     ],
     "css": [
-      "assets/app-48b4b9af.css"
+      "assets/app-a3ca1af4.css"
     ],
-    "file": "assets/app-9088afba.js",
+    "file": "assets/app-729ea68b.js",
     "imports": [
       "__plugin-vue_export-helper-0a7ba489.js"
     ],
@@ -77,7 +77,7 @@
     "src": "resources/scss/admin.scss"
   },
   "resources/scss/app.scss": {
-    "file": "assets/app-2ca98f70.css",
+    "file": "assets/app-6071f8e8.css",
     "isEntry": true,
     "src": "resources/scss/app.scss"
   }

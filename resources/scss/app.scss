@@ -40,7 +40,7 @@ body {
 .stamp {
     transform: rotate(12deg);
     color: #555;
-    font-size: px-to-rem(36);
+    font-size: px-to-rem(30);
     font-weight: 700;
     border: px-to-rem(16) solid #555;
     display: inline-block;
@@ -551,4 +551,10 @@ input {
             width: 100%;
         }
     }
+}
+
+.block__title {
+    margin: 0 0 50px;
+    font-size: 30px;
+    text-align: center;
 }

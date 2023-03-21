@@ -1,6 +1,7 @@
 <template>
     <div class="gallery__wrapper" ref="scrollBlock" @scroll="scrollHandle">
         <div class="gallery" >
+            <h3 class="block__title">Наши выигранные дела</h3>
             <template v-for="(item, index) in posts" :key="item.showId">
             <article class="gallery__item">
                 <div class="gallery__item__image">

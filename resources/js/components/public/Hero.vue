@@ -11,11 +11,11 @@
                     <div class="hero__info__item">За последние 30 дней:<br> <span class="text_middle text_blue">{{ total.day30 }}</span></div>
                     <div class="hero__info__item">Клиентов освобождено:<br> <span class="text_middle text_blue">{{ total.clients }}</span></div>
                 </div>
-                <div class="more__wrapper"><a href="https://osvobodim.com" class="more__btn">На сайт</a></div>
+                <!--<div class="more__wrapper"><a href="https://osvobodim.com" class="more__btn">На сайт</a></div>-->
             </div>
         </div>
     </div>
-    <div class="hero__bottom">
+    <div class="hero__bottom" style="font-size: 24px;">
         <p>Листайте ниже чтобы ознакомиться<br> с результатоми нашей работы</p>
         <div class="mouse"></div>
     </div>

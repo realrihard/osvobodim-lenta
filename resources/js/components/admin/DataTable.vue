@@ -1,19 +1,12 @@
 <template>
-        <draggable
-            v-model="store.posts"
-            group="posts"
-            @start="drag=true"
-            @end="drag=false,dragChange($event)"
+            <!--<div class="dashboard__list__item" :class="element.deleted ? 'post__deleted' : ''">-->
+            <div class="dashboard__list">
+                <div class="dashboard__list__item" v-for="post in posts" :key="post">
+                    <data-table-item :post="post"/>
+                </div>
+            </div>
 
-            item-key="showId"
-            class="dashboard__list"
-        >
-                <template #item="{element}">
-                    <div class="dashboard__list__item" :class="element.deleted ? 'post__deleted' : ''">
-                        <data-table-item :post="element"/>
-                    </div>
-                </template>
-        </draggable>
+            <!--</div>-->
 </template>
 
 <script>
