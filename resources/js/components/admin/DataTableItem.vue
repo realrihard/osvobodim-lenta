@@ -1,5 +1,6 @@
 <template>
         <div class="item__box" @click="toggleSettings(post)">
+            {{ showPost }}
             <div class="item__image" :style="{ backgroundImage: 'url(images/thumb/' + post.image + ')'}">
             </div>
             <div class="item__settings" v-if="post.showSettings">

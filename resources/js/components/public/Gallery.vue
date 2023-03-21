@@ -67,7 +67,8 @@ export default {
             posts.value.push(...newPosts)
         }
 
-        const onImageLoad = () => {
+        const onImageLoad = (value) => {
+            console.log(value.returnValue)
             imageLoaded.value = true
         }
 
