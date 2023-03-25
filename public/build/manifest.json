@@ -1,6 +1,6 @@
 {
-  "__plugin-vue_export-helper-0a7ba489.js": {
-    "file": "assets/_plugin-vue_export-helper-0a7ba489.js"
+  "__plugin-vue_export-helper-c4e9fadd.js": {
+    "file": "assets/_plugin-vue_export-helper-c4e9fadd.js"
   },
   "node_modules/boxicons/fonts/boxicons.eot": {
     "file": "assets/boxicons-c23887bb.eot",
@@ -45,40 +45,33 @@
     "css": [
       "assets/admin-71006fe7.css"
     ],
-    "file": "assets/admin-d6815903.js",
+    "file": "assets/admin-7be51858.js",
     "imports": [
-      "__plugin-vue_export-helper-0a7ba489.js"
+      "__plugin-vue_export-helper-c4e9fadd.js"
     ],
     "isEntry": true,
     "src": "resources/js/admin.js"
   },
-  "resources/js/app.css": {
-    "file": "assets/app-a3ca1af4.css",
-    "src": "resources/js/app.css"
-  },
   "resources/js/app.js": {
     "assets": [
-      "assets/frame-a5c83d5a.png",
-      "assets/logo-dcdeb54c.svg"
+      "assets/logo-dcdeb54c.svg",
+      "assets/frame-a5c83d5a.png"
     ],
-    "css": [
-      "assets/app-a3ca1af4.css"
-    ],
-    "file": "assets/app-cf603c12.js",
+    "file": "assets/app-adcd647f.js",
     "imports": [
-      "__plugin-vue_export-helper-0a7ba489.js"
+      "__plugin-vue_export-helper-c4e9fadd.js"
     ],
     "isEntry": true,
     "src": "resources/js/app.js"
   },
-  "resources/scss/admin.scss": {
+  "resources/scss/admin/admin.scss": {
     "file": "assets/admin-d424a8bf.css",
     "isEntry": true,
-    "src": "resources/scss/admin.scss"
+    "src": "resources/scss/admin/admin.scss"
   },
-  "resources/scss/app.scss": {
-    "file": "assets/app-ce242edc.css",
+  "resources/scss/public/app.scss": {
+    "file": "assets/app-dda38594.css",
     "isEntry": true,
-    "src": "resources/scss/app.scss"
+    "src": "resources/scss/public/app.scss"
   }
 }
