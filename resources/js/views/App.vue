@@ -23,8 +23,14 @@ import Gallery from '../components/public/gallery/Gallery.vue';
                     el: document.querySelector('[data-scroll-container]'),
                     smooth: true,
                     lerp: 0.1,
-                    multiplier: .5
-                });
+                    multiplier: .5,
+                    mobile: {
+                        smooth: true
+                    },
+                    tablet: {
+                        smooth: true
+                    }
+                                    });
 
             })
 
