@@ -24,14 +24,8 @@ import Gallery from '../components/public/gallery/Gallery.vue';
                     smooth: true,
                     lerp: 0.1,
                     multiplier: .5,
-                    mobile: {
-                        smooth: true
-                    },
-                    tablet: {
-                        smooth: true
-                    }
-                                    });
-
+                    smoothMobile: true
+                });
             })
 
             const onContentUpdate = () => {
