@@ -6,6 +6,7 @@
 import { computed } from 'vue'
 
 export default {
+    name: 'stamp',
     props: {
         suma: {
             type: Number,

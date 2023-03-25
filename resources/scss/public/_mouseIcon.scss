@@ -1,26 +1,3 @@
-@keyframes sheen {
-    100% {
-        -webkit-transform: rotateZ(60deg) translate(0, -14em);
-        transform: rotateZ(60deg) translate(0, -14em);
-    }
-}
-
-@keyframes flyup {
-    0% {
-        transform: translateY(0) rotate(0deg);
-        opacity: 1;
-        border-radius: 0;
-    }
-
-    100% {
-        transform: translateY(-1000px) rotate(720deg);
-        opacity: 0;
-        border-radius: 50%;
-    }
-
-}
-
-/* Mouse Scroll Icon Animation */
 $colorBg: #f3f3f3;
 $colorOutline: #006aff;
 $colorOutlineFade: #dbdbdb;
@@ -44,6 +21,43 @@ $animDuration: 5s;
             transparent 50%,
             $colorOutline 50%,
             $colorOutline 100%);
+}
+
+.hero__mouse {
+    @include bgGradient;
+    position: relative;
+    width: $widthMouse;
+    height: $heightMouse;
+    border-radius: 100px;
+    background-size: 100% 200%;
+    animation: colorSlide $animDuration linear infinite,
+        nudgeMouse $animDuration ease-out infinite;
+
+    &:before,
+    &:after {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        margin: auto;
+    }
+
+    &:before {
+        width: $widthMouse - $borderMouse;
+        height: $heightMouse - $borderMouse;
+        background-color: $colorBg;
+        border-radius: 100px;
+    }
+
+    &:after {
+        background-color: $colorOutline;
+        width: $sizeTrackball;
+        height: $sizeTrackball;
+        border-radius: 100%;
+        animation: trackBallSlide $animDuration linear infinite;
+    }
 }
 
 @keyframes colorSlide {

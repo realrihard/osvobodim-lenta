@@ -1,66 +1,45 @@
 <template>
-    <Smoothie class="content">
-        <div class="hero">
-            <div class="header">
-                <div class="container">
-                    <div class="header__block">
-                        <div class="logo"><img src="../../../public/images/assets/logo.svg"></div>
-                    </div>
-                </div>
-            </div>
-            <div class="bg__forms">
-                <div class="circle_mid"></div>
-                <div class="circle_bg"></div>
-            </div>
-            <div class="hero__wrapper">
-                <div class="area" >
-                    <ul class="circles">
-                        <li v-for="n in 10" :key="n"></li>
-                    </ul>
-                </div>
-                <!--<div class="hero__image__layer">
-                    <div class="hero__frame"><img src="../../../public/images/assets/frame.png" alt=""></div>
-                </div>-->
-                <div class="container">
-                    <hero />
-                </div>
-            </div>
-        </div>
-        <div class="container">
-            <gallery />
-        </div>
-    </Smoothie>
+    <div class="wrapper" data-scroll-container >
+        <hero data-scroll-section/>
+        <gallery @content-update="onContentUpdate" :scrollOptions="scroll" data-scroll-section/>
+    </div>
 </template>
 
 <script>
-import Hero from '../components/public/Hero.vue';
-import Gallery from '../components/public/Gallery.vue';
-import { onMounted} from 'vue';
-import { Smoothie } from 'vue-smoothie'
+import LocomotiveScroll from 'locomotive-scroll';
+import { ref, onMounted } from 'vue';
+import Hero from '../components/public/hero/Hero.vue';
+import Gallery from '../components/public/gallery/Gallery.vue';
 
+    export default {
+        components: {
+            Hero,
+            Gallery
+        },
+        setup () {
+            const scroll = ref(null)
+            onMounted(() => {
+                scroll.value = new LocomotiveScroll({
+                    el: document.querySelector('[data-scroll-container]'),
+                    smooth: true,
+                    lerp: 0.1,
+                    multiplier: .5
+                });
 
-export default {
-    components: {
-        Hero,
-        Gallery,
-        Smoothie
-    },
-    setup() {
-        onMounted (() => {
-            const scrollPosition = window.sessionStorage.getItem('scrollPosition');
-            if (scrollPosition) {
-                window.scrollTo(0, parseInt(scrollPosition));
+            })
+
+            const onContentUpdate = () => {
+                scroll.value.update()
             }
-        })
-        return {
-        }
-    },
-}
-</script>
 
-<style scoped>
-.content {
-    width: 100%;
-    height: 100vh;
-}
-</style>
+            const loadNewContent = () => {
+
+            }
+
+            return {
+                scroll,
+                onContentUpdate,
+            }
+        }
+    }
+</script>

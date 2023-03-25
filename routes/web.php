@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostsController;
-use App\Http\Controllers\AdminPostsController;
+use App\Http\Controllers\ContactFormController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,7 +18,6 @@ use App\Http\Controllers\AdminPostsController;
 Route::get('/', function() {
     return view('index');
 });
-Route::get('/posts', [PostsController::class, 'index']);
 
 Route::group(['middleware' => 'auth:sanctum'], function() {
     Route::get('/admin', function() {
@@ -26,6 +25,7 @@ Route::group(['middleware' => 'auth:sanctum'], function() {
     });
 });
 
-Route::get('/posts/show', [AdminPostsController::class, 'show']);
+Route::get('/posts/show', [PostsController::class, 'index'])->middleware('ajax');
+Route::post('/sendmail', [ContactFormController::class, 'sendEmail']);
 
 Auth::routes();

@@ -2,7 +2,6 @@ import axios from "axios";
 
 export default class apiData {
     static async getData(page = 1) {
-        console.log(page)
         try {
             const data = await axios.get("/sanctum/csrf-cookie").then(resp => {
                 return axios.get('api/posts/show?page=' + page)

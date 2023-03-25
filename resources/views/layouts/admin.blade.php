@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-    @vite(['resources/scss/admin.scss', 'resources/js/admin.js'])
+    @vite(['resources/scss/admin/admin.scss', 'resources/js/admin.js'])
     <title>Освободим :: Панель управления</title>
 </head>
 

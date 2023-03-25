@@ -13,10 +13,3 @@ $base-font-size: 16;
     $pxUnitless: strip-unit($size);
     @return #{calc($pxUnitless / $base)}rem;
 }
-
-:root {
-    --body-bg: #f3f3f3;
-
-    // Typography
-    --accent-text-font: 24px;
-}
