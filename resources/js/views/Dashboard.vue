@@ -57,7 +57,7 @@ export default {
             const blockRect = scrollBlock.value.getBoundingClientRect(); // получаем координаты блока
             const contentWindowHeight = window.innerHeight; // получаем высоту окна блока прокрутки
             const bottomOffset = blockRect.bottom - contentWindowHeight - 10; // определяем расстояние от нижней границы блока до нижней границы окна
-            console.log(!loadedPages.value.includes(store.pagination.currentPage))
+
             if (bottomOffset <= 0) {
                 if (store.pagination.currentPage < store.pagination.totalPages) {
                     const currentPage = Number(store.pagination.currentPage) + 1

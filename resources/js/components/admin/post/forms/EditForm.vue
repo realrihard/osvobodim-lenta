@@ -95,7 +95,6 @@ export default {
                 newObject.description = form.value.description
                 newObject.suma = form.value.suma
                 newObject.image = response.image
-                console.log(newObject)
                 store.refreshPost(newObject)
                 store.getPanelSettings(false, null, null)
             }

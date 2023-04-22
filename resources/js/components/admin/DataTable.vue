@@ -50,11 +50,10 @@ export default defineComponent ({
             const posts = [...store.posts]
             const firstShowId = posts[firstPostIndex]['showId']
             const secondShowId = posts[secondPostIndex]['showId']
-            console.log(posts[firstPostIndex])
-            console.log(firstPostIndex, secondPostIndex)
+
             posts[firstPostIndex]['showId'] = secondShowId
             posts[secondPostIndex]['showId'] = firstShowId
-            console.log(posts)
+
             store.refreshPost(posts)
             apiData.updatePostOrder(posts)
         }

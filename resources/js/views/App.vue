@@ -24,8 +24,19 @@ import Gallery from '../components/public/gallery/Gallery.vue';
                     smooth: true,
                     lerp: 0.1,
                     multiplier: .5,
-                    smoothMobile: true
-                });
+                    touchMultiplier: 4,
+                    mobile: {
+                        breakpoint: 0,
+                        smooth: true,
+                        touchMultiplier: 4
+                    },
+                    tablet: {
+                        breakpoint: 0,
+                        smooth: true,
+                        touchMultiplier: 4
+                    }
+                                    });
+
             })
 
             const onContentUpdate = () => {
